@@ -1,0 +1,290 @@
+%% ============================================================ %%
+%%     Frankfurt beamer theme using the Tango color palette     %%
+%% ( http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines ) %%
+%%                   by Matthieu Leclair                        %%
+%% ============================================================ %%
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.arrows}
+\usepackage{xkeyval}
+\usepackage[T1]{fontenc}
+
+\newcommand{\beamerarrow}{\tikz{\node[single arrow,scale=0.3,
+    minimum width=\baselineskip, minimum height=1.8\baselineskip,fill] at (0,0) {};}}
+
+
+% General settings
+% ================
+\mode<presentation>
+
+\useinnertheme[shadow=false]{rounded}
+
+% \usepackage{fontspec}
+% \setsansfont{TeX Gyre Heros}
+\usefonttheme{professionalfonts}
+
+\mode
+<all>
+
+% Define colors
+% =============
+% Full tango palette
+\definecolor{Aluminium1}{HTML}{EEEEEC}
+\definecolor{Aluminium2}{HTML}{D3D7CF}
+\definecolor{Aluminium3}{HTML}{BABDB6}
+\definecolor{Aluminium4}{HTML}{888A85}
+\definecolor{Aluminium5}{HTML}{555753}
+\definecolor{Aluminium6}{HTML}{2E3436}
+\definecolor{Butter1}{HTML}{FCE94F}
+\definecolor{Butter2}{HTML}{EDD400}
+\definecolor{Butter3}{HTML}{C4A000}
+\definecolor{Chameleon1}{HTML}{8AE234}
+\definecolor{Chameleon2}{HTML}{73D216}
+\definecolor{Chameleon3}{HTML}{4E9A06}
+\definecolor{Orange1}{HTML}{FCAF3E}
+\definecolor{Orange2}{HTML}{F57900}
+\definecolor{Orange3}{HTML}{CE5C00}
+\definecolor{Chocolate1}{HTML}{E9B96E}
+\definecolor{Chocolate2}{HTML}{C17D11}
+\definecolor{Chocolate3}{HTML}{8F5902}
+\definecolor{SkyBlue1}{HTML}{729FCF}
+\definecolor{SkyBlue2}{HTML}{3465A4}
+\definecolor{SkyBlue3}{HTML}{204A87}
+\definecolor{Plum1}{HTML}{AD7FA8}
+\definecolor{Plum2}{HTML}{75507B}
+\definecolor{Plum3}{HTML}{5C3566}
+\definecolor{ScarletRed1}{HTML}{EF2929}
+\definecolor{ScarletRed2}{HTML}{CC0000}
+\definecolor{ScarletRed3}{HTML}{A40000}
+\newcommand<>{\plum}[2]{\ifcase#1{\color#3{Plum1}#2}\or{\color#3{Plum2}#2}\or{\color#3{Plum3}#2}\fi}
+% C2SM colors
+\definecolor{C2SM_light_gray}{HTML}{EEEEEC}
+\definecolor{C2SM_dark_gray}{HTML}{2E3436}
+\definecolor{C2SM_petrol_blue}{HTML}{007A96}
+\definecolor{C2SM_logo_blue}{HTML}{57ACDF}
+\definecolor{C2SM_blue3}{HTML}{1269B0}
+\newcommand<>{\petrol}[1]{{\color#2{C2SM_petrol_blue}#1}}
+
+% Structure colors
+% ================
+\definecolor{bg_color}{HTML}{FFFFFF}
+\setbeamercolor{structure}{fg=C2SM_petrol_blue}
+\setbeamercolor{normal text}{fg=C2SM_dark_gray,bg=bg_color}
+\setbeamercolor{alerted text}{fg=Orange3}
+\setbeamercolor{section in head/foot}{fg=C2SM_dark_gray, bg=bg_color!80!white}
+\setbeamercolor{subsection in head/foot}{fg=C2SM_dark_gray}
+
+% Frame title
+% ===========
+\setbeamercolor{frametitle}{fg=structure.fg, bg=}
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamertemplate{frametitle}{%
+    \usebeamerfont{frametitle}\insertframetitle\strut%
+    \vskip.25\baselineskip%
+    \leaders\vrule width \textwidth\vskip0.4pt%
+    \vskip0pt%
+    \nointerlineskip
+}
+
+% Table of content
+% ================
+\defbeamertemplate{section in toc}{bigcircle}
+{\leavevmode\leftskip=2ex%
+  \llap{%
+    \usebeamerfont*{section number projected}%
+    \usebeamercolor{section number projected}%
+    \begin{pgfpicture}{-1ex}{0.25ex}{1ex}{2ex}
+      \color{bg}
+      \pgfpathcircle{\pgfpoint{0pt}{1.25ex}}{2.5ex}
+      \pgfusepath{fill}
+      \pgftext[base]{\color{fg}\large\inserttocsectionnumber}
+    \end{pgfpicture}\kern3.5ex%
+  }%
+  \inserttocsection\par}
+
+% \defbeamertemplate{subsection in toc}{bigcircle}
+% {\leavevmode\leftskip=2em\inserttocsubsection\par}
+\defbeamertemplate{subsection in toc}{bigcircle}
+{\leavevmode\leftskip=2em
+  \llap{%
+    \usebeamerfont*{section number projected}%
+    \usebeamercolor{section number projected}%
+    \begin{pgfpicture}{-1ex}{0.25ex}{1ex}{2ex}
+      \color{bg}
+      \pgfpathcircle{\pgfpoint{6pt}{1.25ex}}{1ex}
+      \pgfusepath{fill}
+    \end{pgfpicture}\kern3.5ex%
+  }%
+  \inserttocsubsection\par}
+
+\setbeamercolor{section in toc}{fg=C2SM_dark_gray,bg=bg_color}
+\setbeamercolor{subsection in toc}{fg=C2SM_dark_gray}
+\setbeamertemplate{section in toc}[bigcircle]
+\setbeamertemplate{subsection in toc}[bigcircle]
+
+
+% Itemize environment
+% ===================
+\setbeamertemplate{items}[square]
+\setbeamertemplate{enumerate items}[circle]
+\setbeamercolor{itemize item}{fg=structure.fg}
+\setbeamercolor{itemize subitem}{fg=structure.fg}
+\setbeamercolor{itemize subsubitem}{fg=structure.fg}
+\setbeamercolor{item projected}{bg=structure.fg}
+\setbeamercolor{enumerate item}{fg=structure.fg}
+\setbeamercolor{enumerate subitem}{fg=structure.fg}
+\setbeamercolor{enumerate subsubitem}{fg=structure.fg}
+
+
+% Block settings
+% ==============
+\setbeamertemplate{blocks}[rounded][shadow=false]
+% Normal blocks
+\setbeamercolor{block title}{use=structure,fg=bg_color,bg=structure.fg}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+% Alert blocks
+\setbeamercolor{block title alerted}{use=alerted text,fg=bg_color,bg=ScarletRed3}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!20!bg}
+\addtobeamertemplate{block alerted begin}{}{
+  \setbeamercolor{itemize item}{fg=ScarletRed3}
+  \setbeamercolor{itemize subitem}{fg=ScarletRed3}
+  \setbeamercolor{itemize subsubitem}{fg=ScarletRed3}
+  \setbeamercolor{item projected}{bg=ScarletRed3}
+  \setbeamercolor{enumerate item}{fg=ScarletRed3}
+  \setbeamercolor{enumerate subitem}{fg=ScarletRed3}
+  \setbeamercolor{enumerate subsubitem}{fg=ScarletRed3}
+}{}
+% Example blocks
+\setbeamercolor{block title example}{use=example text,fg=bg_color,bg=Chocolate3}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!20!bg}
+\addtobeamertemplate{block example begin}{}{
+  \setbeamercolor{itemize item}{fg=Chocolate3}
+  \setbeamercolor{itemize subitem}{fg=Chocolate3}
+  \setbeamercolor{itemize subsubitem}{fg=Chocolate3}
+  \setbeamercolor{item projected}{bg=Chocolate3}
+  \setbeamercolor{enumerate item}{fg=Chocolate3}
+  \setbeamercolor{enumerate subitem}{fg=Chocolate3}
+  \setbeamercolor{enumerate subsubitem}{fg=Chocolate3}
+}{}
+% \BeforeBeginEnvironment{exampleblock}{
+%   \setbeamertemplate{blocks}[default]
+% }
+% \AfterEndEnvironment{exampleblock}{
+%   \setbeamertemplate{blocks}[rounded][shadow=false]
+% }
+
+% Custom color blocks
+\makeatletter
+\define@cmdkey{cblock}[cbl@]{bgcolor}[SkyBlue3]{}
+\define@cmdkey{cblock}[cbl@]{itcolor}[SkyBlue3]{}
+\newenvironment<>{customblock}[2][]{
+  \begingroup
+  \setkeys{cblock}{#1}
+  \setbeamercolor{block title}{fg=block title.fg,bg=\cbl@bgcolor}
+  \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+  \addtobeamertemplate{block begin}{}{
+    \setbeamercolor{itemize item}{fg=\cbl@itcolor}
+    \setbeamercolor{itemize subitem}{fg=\cbl@itcolor}
+    \setbeamercolor{itemize subsubitem}{fg=\cbl@itcolor}
+    \setbeamercolor{item projected}{bg=\cbl@itcolor}
+    \setbeamercolor{enumerate item}{fg=\cbl@itcolor}
+    \setbeamercolor{enumerate subitem}{fg=\cbl@itcolor}
+    \setbeamercolor{enumerate subsubitem}{fg=\cbl@itcolor}}
+  \begin{block}#3{#2}}
+  {\end{block} \endgroup}
+\makeatother
+
+% Background
+% ==========
+% Set frame background color
+\setbeamercolor{background canvas}{bg=bg_color}
+
+% Set background picture
+\makeatletter
+\setbeamertemplate{background}{
+  \ifnum\c@framenumber=1
+  % Clouds picture on title page (frame number 1)
+  \vbox to \paperheight{
+    \vfil
+    \hbox to \paperwidth{
+      \hspace{0.05\paperwidth}
+      \includegraphics[width=0.15\paperwidth]{eth_logo_kurz_pos_crop.pdf}
+      \hfill
+      \color{black}{\small Center for Climate Systems Modeling C2SM}
+      \hspace{0.05\paperwidth}}
+    \vfil
+    \hbox to \paperwidth{
+      \hfil
+      \includegraphics[trim=10cm 0cm 0cm 0cm,clip=true,height=0.75\paperheight]{background_title_page.png}
+      \hfil}
+    \vfil}
+  \else
+  % C2SM logo and ETHZ logo + C2SM acronym on other sllides
+  \vbox to \paperheight{
+    \vspace{0.01\paperheight}
+    \hbox to \paperwidth{
+      \hfil
+      \includegraphics[height=0.08\paperheight]{C2SM_logo.pdf}
+      \hspace{0.01\paperwidth}}
+    \vfil
+    \hbox to \paperwidth{
+      \hspace{0.03\paperwidth}
+      \includegraphics[width=.1\paperwidth]{eth_logo_kurz_pos_crop.pdf}
+      \hspace{0.03\textwidth}
+      \color{black}{\tiny Center for Climate Systems Modeling C2SM}
+      \hspace{0.7\textwidth}
+      \hfil}
+    \vspace{0.01\paperheight}}
+  \fi
+}
+\makeatother
+
+% Title page
+% ==========
+% Set title page font
+\setbeamercolor{title}{fg=bg_color, bg=structure.fg}
+\setbeamercolor{title}{fg=bg_color, bg=structure.fg}
+\setbeamercolor{title}{fg=bg_color, bg=structure.fg}
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{subtitle}{size=\large, series=\bfseries}
+\setbeamerfont{author}{size=\normalsize, series=\mdseries}
+\setbeamerfont{date}{size=\normalsize, series=\mdseries}
+
+% Set title page template
+\makeatletter
+\setbeamertemplate{title page}{
+  \begingroup
+  \pgfsetfillopacity{0.95}
+  \vbox to \paperheight{
+    \vfil
+    \vfil
+    \hbox to \paperwidth{
+      \hspace{\dimexpr -\beamer@leftmargin-0.27cm\relax}
+      \begin{beamercolorbox}[wd=.65\paperwidth,sep=8pt,colsep=-4bp,rounded=false,shadow=false]{title}
+        \usebeamerfont{title}\inserttitle\par%
+        \ifx\insertsubtitle\@empty%
+        \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+        \fi%
+        \vskip1em\par
+        \usebeamerfont{author}\insertauthor
+        \vskip1em\par
+        \usebeamerfont{date}\insertdate
+      \end{beamercolorbox}
+      \hfil}
+    \vskip0.5em
+    \vfil
+  }
+  \endgroup
+}
+\makeatother
+
+% Head line
+% =========
+% % Remove headline
+% \setbeamertemplate{headline}{}
+
+% Foot line
+% =========
+% Remove navigation symbols
