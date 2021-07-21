@@ -77,7 +77,7 @@
 % Frame title
 % ===========
 \setbeamercolor{frametitle}{fg=structure.fg, bg=}
-\setbeamerfont{frametitle}{size=\Large}
+\setbeamerfont{frametitle}{size=\Large\bfseries}
 \setbeamertemplate{frametitle}{%
     \usebeamerfont{frametitle}\insertframetitle\strut%
     \vskip.25\baselineskip%
@@ -211,33 +211,37 @@
       \includegraphics[width=0.15\paperwidth]{eth_logo_kurz_pos_crop.pdf}
       \hfill
       \color{black}{\small Center for Climate Systems Modeling C2SM}
-      \hspace{0.05\paperwidth}}
+      \hspace{0.055\paperwidth}}
     \vfil
     \hbox to \paperwidth{
       \hfil
-      \includegraphics[trim=10cm 0cm 0cm 0cm,clip=true,height=0.75\paperheight]{background_title_page.png}
+      \includegraphics[trim=10cm 0cm 0cm 0cm,clip=true,height=0.722\paperheight]{background_title_page.png}
       \hfil}
     \vfil}
   \else
-  % C2SM logo and ETHZ logo + C2SM acronym on other sllides
+  % C2SM logo and ETHZ logo + C2SM acronym on other slides
   \vbox to \paperheight{
-    \vspace{0.01\paperheight}
+    \vspace{0.02\paperheight}
     \hbox to \paperwidth{
       \hfil
       \includegraphics[height=0.08\paperheight]{C2SM_logo.pdf}
-      \hspace{0.01\paperwidth}}
+      \hspace{0.055\paperwidth}}
     \vfil
     \hbox to \paperwidth{
-      \hspace{0.03\paperwidth}
-      \includegraphics[width=.1\paperwidth]{eth_logo_kurz_pos_crop.pdf}
+      \hspace{0.048\paperwidth}
+      \includegraphics[width=.12\paperwidth]{eth_logo_kurz_pos_crop.pdf}
       \hspace{0.03\textwidth}
       \color{black}{\tiny Center for Climate Systems Modeling C2SM}
-      \hspace{0.7\textwidth}
-      \hfil}
-    \vspace{0.01\paperheight}}
+      \hspace{0.35\textwidth}
+      \hfil
+      \tiny\mydate
+      \hspace{0.2\paperwidth}
+    \vspace{0.02\paperheight}}}
   \fi
 }
 \makeatother
+
+
 
 % Title page
 % ==========
@@ -280,6 +284,9 @@
 }
 \makeatother
 
+\def\mydate{\leavevmode\hbox{\the\year-\twodigits\month-\twodigits\day}}
+\def\twodigits#1{\ifnum#1<10 0\fi\the#1}
+
 % Head line
 % =========
 % % Remove headline
@@ -288,3 +295,4 @@
 % Foot line
 % =========
 % Remove navigation symbols
+
