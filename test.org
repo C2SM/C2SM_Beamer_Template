@@ -16,9 +16,6 @@
 # -------------
 #+LATEX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS: [presentation, aspectratio=169]
-#+LATEX_HEADER: \usepackage{amsmath}
-#+LATEX_HEADER: \usepackage[customcolors]{hf-tikz}
-#+LATEX_HEADER: \usepackage{lastpage}
 #+LATEX_HEADER: \usepackage{fontspec}
 #+LATEX_HEADER: \setsansfont{Roboto}
 #+BEAMER_THEME: C2SM
