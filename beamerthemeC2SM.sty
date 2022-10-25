@@ -7,7 +7,6 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.arrows}
 \usepackage{xkeyval}
-\usepackage[T1]{fontenc}
 
 \newcommand{\beamerarrow}{\tikz{\node[single arrow,scale=0.3,
     minimum width=\baselineskip, minimum height=1.8\baselineskip,fill] at (0,0) {};}}
@@ -79,8 +78,9 @@
 \setbeamercolor{frametitle}{fg=structure.fg, bg=}
 \setbeamerfont{frametitle}{size=\Large\bfseries}
 \setbeamertemplate{frametitle}{%
+    \vskip6pt
     \usebeamerfont{frametitle}\insertframetitle\strut%
-    \vskip.25\baselineskip%
+    \vskip.01\baselineskip%
     \leaders\vrule width \textwidth\vskip0.4pt%
     \vskip0pt%
     \nointerlineskip
@@ -166,6 +166,8 @@
   \setbeamercolor{enumerate subitem}{fg=Chocolate3}
   \setbeamercolor{enumerate subsubitem}{fg=Chocolate3}
 }{}
+\addtobeamertemplate{block begin}{\vskip -\bigskipamount}{}
+\addtobeamertemplate{block end}{}{\vskip -\bigskipamount}
 % \BeforeBeginEnvironment{exampleblock}{
 %   \setbeamertemplate{blocks}[default]
 % }
@@ -182,7 +184,7 @@
   \setkeys{cblock}{#1}
   \setbeamercolor{block title}{fg=block title.fg,bg=\cbl@bgcolor}
   \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
-  \addtobeamertemplate{block begin}{}{
+  \addtobeamertemplate{block begin}{\vskip +\bigskipamount}{
     \setbeamercolor{itemize item}{fg=\cbl@itcolor}
     \setbeamercolor{itemize subitem}{fg=\cbl@itcolor}
     \setbeamercolor{itemize subsubitem}{fg=\cbl@itcolor}
@@ -190,6 +192,7 @@
     \setbeamercolor{enumerate item}{fg=\cbl@itcolor}
     \setbeamercolor{enumerate subitem}{fg=\cbl@itcolor}
     \setbeamercolor{enumerate subsubitem}{fg=\cbl@itcolor}}
+  \addtobeamertemplate{block end}{}{\vskip -\bigskipamount}    
   \begin{block}#3{#2}}
   {\end{block} \endgroup}
 \makeatother
@@ -294,5 +297,17 @@
 
 % Foot line
 % =========
-% Remove navigation symbols
+% Purge navigation symbols
+\setbeamertemplate{navigation symbols}{}
+% Add page number to navigation symbols
+\setbeamercolor{footline}{fg=black}
+\addtobeamertemplate{navigation symbols}{}{
+  \usebeamerfont{footline}
+  \usebeamercolor[fg]{footline}
+  \ifnum \value{page} > 1
+    \insertpagenumber/\pageref{LastPage}
+    \hspace{0.055\paperwidth}
+    \vspace{0.02\paperheight}
+  \fi
+}
 
