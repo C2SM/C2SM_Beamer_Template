@@ -8,9 +8,26 @@
 \usetikzlibrary{shapes.arrows}
 \usepackage{xkeyval}
 \usepackage{lastpage}
+\usepackage[export]{adjustbox} % graphicx is also included
 
 \newcommand{\beamerarrow}{\tikz{\node[single arrow,scale=0.3,
     minimum width=\baselineskip, minimum height=1.8\baselineskip,fill] at (0,0) {};}}
+
+\newcommand<>{\plainFrameGraphics}[1]{
+  % all template changes are local to this group.
+  \begingroup
+  \setbeamertemplate{background}{}
+  \setbeamertemplate{navigation symbols}{}
+  \begin{frame}<article:0>[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[at=(current page.center)] {
+        \includegraphics[keepaspectratio,
+        max height=\paperheight,max width=\paperwidth]{#1}
+      };
+    \end{tikzpicture}
+  \end{frame}
+  \endgroup
+}
 
 
 % General settings
