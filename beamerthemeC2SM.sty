@@ -29,6 +29,15 @@
   \endgroup
 }
 
+% Add a background figure relative to the center of the page
+% put any options to \node in the #2 argument
+% put any options to \includegraphics in the #3 argument
+% Overlay option is passed to \node
+\newcommand<>{\bgfig}[3]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node#4[at=(current page.center),#2]{\includegraphics[#3]{#1}};
+  \end{tikzpicture}
+}
 
 % General settings
 % ================
