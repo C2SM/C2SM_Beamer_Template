@@ -3,94 +3,20 @@
 %% ( http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines ) %%
 %%                   by Matthieu Leclair                        %%
 %% ============================================================ %%
+\RequirePackage{lastpage}
+\RequirePackage{tango}
 
-\usepackage{tikz}
-\usetikzlibrary{shapes.arrows}
-\usepackage{xkeyval}
-\usepackage{lastpage}
-\usepackage[export]{adjustbox} % graphicx is also included
-
-\newcommand{\beamerarrow}{\tikz{\node[single arrow,scale=0.3,
-    minimum width=\baselineskip, minimum height=1.8\baselineskip,fill] at (0,0) {};}}
-
-\newcommand<>{\plainFrameGraphics}[1]{
-  % all template changes are local to this group.
-  \begingroup
-  \setbeamertemplate{background}{}
-  \setbeamertemplate{navigation symbols}{}
-  \begin{frame}<article:0>[plain]
-    \begin{tikzpicture}[remember picture,overlay]
-      \node[at=(current page.center)] {
-        \includegraphics[keepaspectratio,
-        max height=\paperheight,max width=\paperwidth]{#1}
-      };
-    \end{tikzpicture}
-  \end{frame}
-  \endgroup
-}
-
-% Add a background figure relative to the center of the page
-% put any options to \node in the #2 argument
-% put any options to \includegraphics in the #3 argument
-% Overlay option is passed to \node
-\newcommand<>{\bgfig}[3]{
-  \begin{tikzpicture}[remember picture,overlay]
-    \node#4[at=(current page.center),#2]{\includegraphics[#3]{#1}};
-  \end{tikzpicture}
-}
 
 % General settings
 % ================
 \mode<presentation>
-
 \useinnertheme[shadow=false]{rounded}
-
-% \usepackage{fontspec}
-% \setsansfont{TeX Gyre Heros}
 \usefonttheme{professionalfonts}
-
 \mode
 <all>
 
 % Define colors
 % =============
-% Full tango palette
-\definecolor{Aluminium1}{HTML}{EEEEEC}
-\definecolor{Aluminium2}{HTML}{D3D7CF}
-\definecolor{Aluminium3}{HTML}{BABDB6}
-\definecolor{Aluminium4}{HTML}{888A85}
-\definecolor{Aluminium5}{HTML}{555753}
-\definecolor{Aluminium6}{HTML}{2E3436}
-\definecolor{Butter1}{HTML}{FCE94F}
-\definecolor{Butter2}{HTML}{EDD400}
-\definecolor{Butter3}{HTML}{C4A000}
-\definecolor{Chameleon1}{HTML}{8AE234}
-\definecolor{Chameleon2}{HTML}{73D216}
-\definecolor{Chameleon3}{HTML}{4E9A06}
-\definecolor{Orange1}{HTML}{FCAF3E}
-\definecolor{Orange2}{HTML}{F57900}
-\definecolor{Orange3}{HTML}{CE5C00}
-\definecolor{Chocolate1}{HTML}{E9B96E}
-\definecolor{Chocolate2}{HTML}{C17D11}
-\definecolor{Chocolate3}{HTML}{8F5902}
-\definecolor{SkyBlue1}{HTML}{729FCF}
-\definecolor{SkyBlue2}{HTML}{3465A4}
-\definecolor{SkyBlue3}{HTML}{204A87}
-\definecolor{Plum1}{HTML}{AD7FA8}
-\definecolor{Plum2}{HTML}{75507B}
-\definecolor{Plum3}{HTML}{5C3566}
-\definecolor{ScarletRed1}{HTML}{EF2929}
-\definecolor{ScarletRed2}{HTML}{CC0000}
-\definecolor{ScarletRed3}{HTML}{A40000}
-\newcommand<>{\plum}[2]{\ifcase#1{\color#3{Plum1}#2}\or{\color#3{Plum2}#2}\or{\color#3{Plum3}#2}\fi}
-\newcommand<>{\butter}[2]{\ifcase#1{\color#3{Butter1}#2}\or{\color#3{Butter2}#2}\or{\color#3{Butter3}#2}\fi}
-\newcommand<>{\chameleon}[2]{\ifcase#1{\color#3{Chameleon1}#2}\or{\color#3{Chameleon2}#2}\or{\color#3{Chameleon3}#2}\fi}
-\newcommand<>{\orange}[2]{\ifcase#1{\color#3{Orange1}#2}\or{\color#3{Orange2}#2}\or{\color#3{Orange3}#2}\fi}
-\newcommand<>{\chocolate}[2]{\ifcase#1{\color#3{Chocolate1}#2}\or{\color#3{Chocolate2}#2}\or{\color#3{Chocolate3}#2}\fi}
-\newcommand<>{\skyblue}[2]{\ifcase#1{\color#3{SkyBlue1}#2}\or{\color#3{SkyBlue2}#2}\or{\color#3{SkyBlue3}#2}\fi}
-\newcommand<>{\scarletred}[2]{\ifcase#1{\color#3{ScarletRed1}#2}\or{\color#3{ScarletRed2}#2}\or{\color#3{ScarletRed3}#2}\fi}
-
-% C2SM colors
 \definecolor{C2SM_light_gray}{HTML}{EEEEEC}
 \definecolor{C2SM_dark_gray}{HTML}{2E3436}
 \definecolor{C2SM_petrol_blue}{HTML}{007A96}
@@ -200,33 +126,6 @@
   \setbeamercolor{enumerate subitem}{fg=Chocolate3}
   \setbeamercolor{enumerate subsubitem}{fg=Chocolate3}
 }{}
-% \BeforeBeginEnvironment{exampleblock}{
-%   \setbeamertemplate{blocks}[default]
-% }
-% \AfterEndEnvironment{exampleblock}{
-%   \setbeamertemplate{blocks}[rounded][shadow=false]
-% }
-
-% Custom color blocks
-\makeatletter
-\define@cmdkey{cblock}[cbl@]{bgcolor}[SkyBlue3]{}
-\define@cmdkey{cblock}[cbl@]{itcolor}[SkyBlue3]{}
-\newenvironment<>{customblock}[2][]{
-  \begingroup
-  \setkeys{cblock}{#1}
-  \setbeamercolor{block title}{fg=bg_color,bg=\cbl@bgcolor}
-  \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
-  \addtobeamertemplate{block begin}{}{
-    \setbeamercolor{itemize item}{fg=\cbl@itcolor}
-    \setbeamercolor{itemize subitem}{fg=\cbl@itcolor}
-    \setbeamercolor{itemize subsubitem}{fg=\cbl@itcolor}
-    \setbeamercolor{item projected}{bg=\cbl@itcolor}
-    \setbeamercolor{enumerate item}{fg=\cbl@itcolor}
-    \setbeamercolor{enumerate subitem}{fg=\cbl@itcolor}
-    \setbeamercolor{enumerate subsubitem}{fg=\cbl@itcolor}}
-  \begin{block}#3{#2}}
-  {\end{block} \endgroup}
-\makeatother
 
 % Background
 % ==========
@@ -274,8 +173,6 @@
   \fi
 }
 \makeatother
-
-
 
 % Title page
 % ==========
@@ -342,3 +239,4 @@
   \fi
 }
 
+\endinput

@@ -1,0 +1,63 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{beamertools}
+[2022/11/01 v0.01 LaTeX package for various beamer convenience functions]
+
+\RequirePackage{xkeyval}
+\RequirePackage[export]{adjustbox} % graphicx is also included
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.arrows}
+
+% Draw nice "imply"-like arrows
+\newcommand{\beamerarrow}{\tikz{\node[single arrow,scale=0.3,
+    minimum width=\baselineskip, minimum height=1.8\baselineskip,fill] at (0,0) {};}}
+
+
+% Display maximized figure on a full frame, keeping aspectratio
+\newcommand<>{\plainFrameGraphics}[1]{
+  % all template changes are local to this group.
+  \begingroup
+  \setbeamertemplate{background}{}
+  \setbeamertemplate{navigation symbols}{}
+  \begin{frame}<article:0>[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[at=(current page.center)] {
+        \includegraphics[keepaspectratio,
+        max height=\paperheight,max width=\paperwidth]{#1}
+      };
+    \end{tikzpicture}
+  \end{frame}
+  \endgroup
+}
+
+% Add a background figure relative to the center of the page
+% put any options to \node in the #2 argument like xshift, yshift or opacity
+% put any options to \includegraphics in the #3 argument
+% Overlay option is passed to \node
+\newcommand<>{\bgfig}[3]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node#4[at=(current page.center),#2]{\includegraphics[#3]{#1}};
+  \end{tikzpicture}
+}
+
+% Make blocks with cutom background and itemize colors
+\makeatletter
+\define@cmdkey{cblock}[cbl@]{bgcolor}[strucutre.fg]{}
+\define@cmdkey{cblock}[cbl@]{itcolor}[strucutre.fg]{}
+\newenvironment<>{customblock}[2][]{
+  \begingroup
+  \setkeys{cblock}{#1}
+  \setbeamercolor{block title}{fg=normal text.bg,bg=\cbl@bgcolor}
+  \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+  \addtobeamertemplate{block begin}{}{
+    \setbeamercolor{itemize item}{fg=\cbl@itcolor}
+    \setbeamercolor{itemize subitem}{fg=\cbl@itcolor}
+    \setbeamercolor{itemize subsubitem}{fg=\cbl@itcolor}
+    \setbeamercolor{item projected}{bg=\cbl@itcolor}
+    \setbeamercolor{enumerate item}{fg=\cbl@itcolor}
+    \setbeamercolor{enumerate subitem}{fg=\cbl@itcolor}
+    \setbeamercolor{enumerate subsubitem}{fg=\cbl@itcolor}}
+  \begin{block}#3{#2}}
+  {\end{block} \endgroup}
+\makeatother
+
+\endinput
