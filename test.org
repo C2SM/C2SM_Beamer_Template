@@ -18,6 +18,8 @@
 #+LATEX_CLASS_OPTIONS: [presentation, aspectratio=169]
 #+LATEX_HEADER: \usepackage{fontspec}
 #+LATEX_HEADER: \setsansfont{Roboto}
+#+LATEX_HEADER: \usepackage{beamertools}
+#+LATEX_HEADER: \usepackage{tango}
 #+BEAMER_THEME: C2SM
 #+BEAMER_FRAME_LEVEL: 3
     
