@@ -14,7 +14,7 @@
 \usepackage{hyperref}
 \usepackage{minted}
 \usepackage{fontspec}
-\setsansfont{Roboto}
+\usepackage[sfdefault,light]{roboto}
 \usepackage{beamertools}
 \usepackage{tango}
 
@@ -37,13 +37,13 @@
 \begin{document}
 
 \maketitle
-\section{Test\hfill{}\textsc{export}}
-\label{sec:orgdaacb32}
+\section{Part 1}
+\label{sec:part1}
 
-\subsection{Fake subsection}
-\label{sec:orga2e0f3d}
+\subsection{The first frame}
+\label{sec:first_frame}
 
-\begin{frame}[label={sec:orge509f46}]{The frame title}
+\begin{frame}{The frame title}
 \note{note
 Talk no more than 1 minute.}
 
@@ -93,7 +93,11 @@ Hello
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orgd31d4bd}]{Frame title 2}
+\section{Part 2}
+\label{sec:part2}
+\subsection{The first frame of part 2}
+\label{sec:first_frame2}
+\begin{frame}{Frame title 2}
 Some blabla
 \begin{itemize}
 \item super exciting results
@@ -101,7 +105,7 @@ Some blabla
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org60974c3}]{The frame title over 2 lines \\  logo still works!}
+\begin{frame}{The frame title over 2 lines \\  logo still works!}
 \begin{exampleblock}{Coucou}
 \begin{enumerate}
 \item toto
