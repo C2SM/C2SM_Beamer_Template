@@ -3,7 +3,6 @@
 %% ( http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines ) %%
 %%                   by Matthieu Leclair                        %%
 %% ============================================================ %%
-\RequirePackage{lastpage}
 \RequirePackage{tango}
 
 
@@ -233,7 +232,7 @@
   \usebeamerfont{footline}
   \usebeamercolor[fg]{footline}
   \ifnum \value{page} > 1
-    \insertpagenumber/\pageref{LastPage}
+    \insertframenumber{} / \inserttotalframenumber
     \hspace{0.055\paperwidth}
     \vspace{0.015\paperheight}
   \fi
