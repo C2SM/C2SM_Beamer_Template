@@ -98,12 +98,18 @@
 
 % Block settings
 % ==============
-\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{blocks}[default]%[rounded][shadow=false]
 % Normal blocks
 \setbeamercolor{block title}{use=structure,fg=bg_color,bg=structure.fg}
+\setbeamerfont{block title}{series=\bfseries}
 \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+\addtobeamertemplate{block begin}{%
+  \centering\minipage{0.98\textwidth}%
+}{}
+\addtobeamertemplate{block end}{}{\endminipage\par}
 % Alert blocks
 \setbeamercolor{block title alerted}{use=alerted text,fg=bg_color,bg=ScarletRed3}
+\setbeamerfont{block title alerted}{series=\bfseries}
 \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!20!bg}
 \addtobeamertemplate{block alerted begin}{}{
   \setbeamercolor{itemize item}{fg=ScarletRed3}
@@ -114,8 +120,13 @@
   \setbeamercolor{enumerate subitem}{fg=ScarletRed3}
   \setbeamercolor{enumerate subsubitem}{fg=ScarletRed3}
 }{}
+\addtobeamertemplate{block alerted begin}{%
+  \centering\minipage{0.98\textwidth}%
+}{}
+\addtobeamertemplate{block alerted end}{}{\endminipage\par}
 % Example blocks
 \setbeamercolor{block title example}{use=example text,fg=bg_color,bg=Chocolate3}
+\setbeamerfont{block title example}{series=\bfseries}
 \setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!20!bg}
 \addtobeamertemplate{block example begin}{}{
   \setbeamercolor{itemize item}{fg=Chocolate3}
@@ -126,6 +137,10 @@
   \setbeamercolor{enumerate subitem}{fg=Chocolate3}
   \setbeamercolor{enumerate subsubitem}{fg=Chocolate3}
 }{}
+\addtobeamertemplate{block example begin}{%
+  \centering\minipage{0.98\textwidth}%
+}{}
+\addtobeamertemplate{block example end}{}{\endminipage\par}
 
 % Background
 % ==========
@@ -233,7 +248,8 @@
   \usebeamerfont{footline}
   \usebeamercolor[fg]{footline}
   \ifnum \value{page} > 1
-    \insertpagenumber/\pageref{LastPage}
+    \insertframenumber{} / \inserttotalframenumber
+    % \insertpagenumber/\pageref{LastPage}
     \hspace{0.055\paperwidth}
     \vspace{0.015\paperheight}
   \fi
