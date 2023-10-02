@@ -21,18 +21,18 @@
 \def\mydate{December 24, 2022}
 \def\mydatefootnote{2022-12-24}
 
-\usetheme{C2SM}
+\usetheme[darkmode]{C2SM}
 \author{My wonderful self}
 \date{\mydate}
 \title{The Title}
 \subtitle{The more verbose Subtitle}
 \hypersetup{
- pdfauthor={My wonderful self},
- pdftitle={The Title},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={}, 
- pdflang={English}}
+  pdfauthor={My wonderful self},
+  pdftitle={The Title},
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={}, 
+  pdflang={English}}
 \begin{document}
 
 \maketitle
@@ -43,53 +43,53 @@
 \label{sec:first_frame}
 
 \begin{frame}{The frame title}
-\note{note
-Talk no more than 1 minute.}
+  \note{note
+    Talk no more than 1 minute.}
 
-\begin{block}<1->{A normal block}
-\begin{itemize}
-\item Hello World
-\item The 2 following blocks are in an overprint environment
-\end{itemize}
-\end{block}
+  \begin{block}<1->{A normal block}
+    \begin{itemize}
+    \item Hello World
+    \item The 2 following blocks are in an overprint environment
+    \end{itemize}
+  \end{block}
 
-\begin{overprint}
-\onslide<2>
+  \begin{overprint}
+    \onslide<2>
 
-\begin{customblock}<2->[itcolor=ScarletRed3, bgcolor=Plum3]{A custom block with columns}
-\begin{columns}
-\begin{column}{0.6\columnwidth}
-Some definitions:
-\begin{description}
-\item[{toto}] some blabla
-\item[{tata}] another blabla
-\end{description}
-\end{column}
+    \begin{customblock}<2->[bgcolor=plum, itcolor=plum]{A custom color block with columns}
+      \begin{columns}
+        \begin{column}{0.6\columnwidth}
+          Some definitions:
+          \begin{description}
+          \item[{toto}] some blabla
+          \item[{tata}] another blabla
+          \end{description}
+        \end{column}
 
-\begin{column}{0.3\columnwidth}
-enumerate env:
-\begin{enumerate}
-\item something
-\item Something else
-\end{enumerate}
-\end{column}
-\end{columns}
-\end{customblock}
+        \begin{column}{0.3\columnwidth}
+          enumerate env:
+          \begin{enumerate}
+          \item something
+          \item Something else
+          \end{enumerate}
+        \end{column}
+      \end{columns}
+    \end{customblock}
 
-\onslide<3->
+    \onslide<3->
 
-\begin{exampleblock}{An example block}
-Hello
-\end{exampleblock}
-\end{overprint}
+    \begin{exampleblock}{An example block}
+      Hello
+    \end{exampleblock}
+  \end{overprint}
 
-\onslide<4->
-\begin{enumerate}
-\item first item
-\item second item
-\setcounter{enumi}{5}
-\item Changing enum counter
-\end{enumerate}
+  \onslide<4->
+  \begin{enumerate}
+  \item first item
+  \item second item
+    \setcounter{enumi}{5}
+  \item Changing enum counter
+  \end{enumerate}
 \end{frame}
 
 \section{Part 2}
@@ -97,21 +97,21 @@ Hello
 \subsection{The first frame of part 2}
 \label{sec:first_frame2}
 \begin{frame}{Frame title 2}
-Some blabla
-\begin{itemize}
-\item super exciting results
-\item even more awesome
-\end{itemize}
+  Some blabla
+  \begin{itemize}
+  \item super exciting results
+  \item even more awesome
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{The frame title over 2 lines \\  logo still works!}
-\begin{exampleblock}{Coucou}
-\begin{enumerate}
-\item toto
-\item tata
-\item tutu
-\end{enumerate}
-\end{exampleblock}
+  \begin{alertblock}{An alerted block}
+    \begin{enumerate}
+    \item toto
+    \item tata
+    \item tutu
+    \end{enumerate}
+  \end{alertblock}
 \end{frame}
 
 \end{document}

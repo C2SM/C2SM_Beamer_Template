@@ -3,34 +3,73 @@
 %% ( http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines ) %%
 %%                   by Matthieu Leclair                        %%
 %% ============================================================ %%
-\RequirePackage{tango}
-
+\RequirePackage{xcolor}
 
 % General settings
 % ================
+\newif\if@doDarkMode
+\@doDarkModefalse
+\DeclareOption{darkmode}{\@doDarkModetrue}
+\ProcessOptions
+
 \mode<presentation>
-\useinnertheme[shadow=false]{rounded}
+\useinnertheme[shadow=false]
 \usefonttheme{professionalfonts}
 \mode
 <all>
 
 % Define colors
 % =============
-\definecolor{C2SM_light_gray}{HTML}{EEEEEC}
-\definecolor{C2SM_dark_gray}{HTML}{2E3436}
 \definecolor{C2SM_petrol_blue}{HTML}{007A96}
-\definecolor{C2SM_logo_blue}{HTML}{57ACDF}
-\definecolor{C2SM_blue3}{HTML}{1269B0}
 \newcommand<>{\petrol}[1]{{\color#2{C2SM_petrol_blue}#1}}
+
+\definecolor{darkgrayHsb}{Hsb}{195,0.15,0.21}
+\definecolor{lightgrayHsb}{Hsb}{60,0.01,0.93}
+\definecolor{blueHsb}{Hsb}{211,0.4,1}
+\definecolor{structBlueHsb}{Hsb}{211,0.5,0.9}
+\definecolor{plumHsb}{Hsb}{307,0.27,0.8}
+\definecolor{redHsb}{Hsb}{0,0.5,1}
+\definecolor{orangeHsb}{Hsb}{36,0.6,1}
+\definecolor{greenHsb}{Hsb}{90,0.4,0.9}
+\definecolor{titleBlueHsb}{Hsb}{191,1,0.4}
+
+\colorlet{darkgray}[rgb]{darkgrayHsb}
+\colorlet{lightgray}[rgb]{lightgrayHsb}
+\colorlet{blue}[rgb]{blueHsb}
+\colorlet{structBlue}[rgb]{structBlueHsb}
+\colorlet{plum}[rgb]{plumHsb}
+\colorlet{red}[rgb]{redHsb}
+\colorlet{orange}[rgb]{orangeHsb}
+\colorlet{green}[rgb]{greenHsb}
+\colorlet{titleBlue}[rgb]{titleBlueHsb}
+
 
 % Structure colors
 % ================
-\definecolor{bg_color}{HTML}{FFFFFF}
-\setbeamercolor{structure}{fg=C2SM_petrol_blue}
-\setbeamercolor{normal text}{fg=C2SM_dark_gray,bg=bg_color}
-\setbeamercolor{alerted text}{fg=Orange3}
-\setbeamercolor{section in head/foot}{fg=C2SM_dark_gray, bg=bg_color!80!white}
-\setbeamercolor{subsection in head/foot}{fg=C2SM_dark_gray}
+\if@doDarkMode
+  \colorlet{bg_color}{darkgray}
+  \colorlet{fg_color}{lightgray}
+  \colorlet{block}{blue}
+  \colorlet{example}{green}
+  \colorlet{alert}{orange}
+  \setbeamercolor{structure}{fg=blue}
+  \setbeamercolor{title}{fg=fg_color, bg=titleBlue}
+  \def\C2SMLogo{./Graphics/C2SM_logo_blue.pdf}
+  \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop_lightgray.pdf}
+\else
+  \definecolor{bg_color}{HTML}{FFFFFF}
+  \colorlet{fg_color}{darkgray}
+  \colorlet{block}{C2SM_petrol_blue}
+  \definecolor{example}{HTML}{8F5902}
+  \definecolor{alert}{HTML}{A40000}
+  \setbeamercolor{structure}{fg=C2SM_petrol_blue}
+  \setbeamercolor{title}{fg=bg_color, bg=C2SM_petrol_blue}
+  \def\C2SMLogo{./Graphics/C2SM_logo.pdf}
+  \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop.pdf}
+\fi
+
+\setbeamercolor{normal text}{fg=fg_color,bg=bg_color}
+\setbeamercolor{alerted text}{fg=alert}
 
 % Frame title
 % ===========
@@ -76,8 +115,8 @@
   }%
   \inserttocsubsection\par}
 
-\setbeamercolor{section in toc}{fg=C2SM_dark_gray,bg=bg_color}
-\setbeamercolor{subsection in toc}{fg=C2SM_dark_gray}
+\setbeamercolor{section in toc}{fg=fg_color,bg=bg_color}
+\setbeamercolor{subsection in toc}{fg=darkgray}
 \setbeamertemplate{section in toc}[bigcircle]
 \setbeamertemplate{subsection in toc}[bigcircle]
 
@@ -89,7 +128,7 @@
 \setbeamercolor{itemize item}{fg=structure.fg}
 \setbeamercolor{itemize subitem}{fg=structure.fg}
 \setbeamercolor{itemize subsubitem}{fg=structure.fg}
-\setbeamercolor{item projected}{bg=structure.fg}
+\setbeamercolor{item projected}{bg=structure.fg, fg=bg_color}
 \setbeamercolor{enumerate item}{fg=structure.fg}
 \setbeamercolor{enumerate subitem}{fg=structure.fg}
 \setbeamercolor{enumerate subsubitem}{fg=structure.fg}
@@ -97,33 +136,46 @@
 
 % Block settings
 % ==============
-\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{blocks}[shadow=false]
 % Normal blocks
-\setbeamercolor{block title}{use=structure,fg=bg_color,bg=structure.fg}
+\setbeamercolor{block title}{fg=bg_color,bg=block}
+\setbeamerfont{block title}{series=\bfseries}
 \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!20!bg}
+\addtobeamertemplate{block begin}{}{
+  \setbeamercolor{itemize item}{fg=block}
+  \setbeamercolor{itemize subitem}{fg=block}
+  \setbeamercolor{itemize subsubitem}{fg=block}
+  \setbeamercolor{item projected}{bg=block}
+  \setbeamercolor{enumerate item}{fg=block}
+  \setbeamercolor{enumerate subitem}{fg=block}
+  \setbeamercolor{enumerate subsubitem}{fg=block}
+  \setbeamercolor{description item}{fg=block}
+}{}
 % Alert blocks
-\setbeamercolor{block title alerted}{use=alerted text,fg=bg_color,bg=ScarletRed3}
+\setbeamercolor{block title alerted}{fg=bg_color,bg=alert}
 \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!20!bg}
 \addtobeamertemplate{block alerted begin}{}{
-  \setbeamercolor{itemize item}{fg=ScarletRed3}
-  \setbeamercolor{itemize subitem}{fg=ScarletRed3}
-  \setbeamercolor{itemize subsubitem}{fg=ScarletRed3}
-  \setbeamercolor{item projected}{bg=ScarletRed3}
-  \setbeamercolor{enumerate item}{fg=ScarletRed3}
-  \setbeamercolor{enumerate subitem}{fg=ScarletRed3}
-  \setbeamercolor{enumerate subsubitem}{fg=ScarletRed3}
+  \setbeamercolor{itemize item}{fg=alert}
+  \setbeamercolor{itemize subitem}{fg=alert}
+  \setbeamercolor{itemize subsubitem}{fg=alert}
+  \setbeamercolor{item projected}{bg=alert}
+  \setbeamercolor{enumerate item}{fg=alert}
+  \setbeamercolor{enumerate subitem}{fg=alert}
+  \setbeamercolor{enumerate subsubitem}{fg=alert}
+  \setbeamercolor{description item}{fg=alert}
 }{}
 % Example blocks
-\setbeamercolor{block title example}{use=example text,fg=bg_color,bg=Chocolate3}
+\setbeamercolor{block title example}{use=example text,fg=bg_color,bg=example}
 \setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!20!bg}
 \addtobeamertemplate{block example begin}{}{
-  \setbeamercolor{itemize item}{fg=Chocolate3}
-  \setbeamercolor{itemize subitem}{fg=Chocolate3}
-  \setbeamercolor{itemize subsubitem}{fg=Chocolate3}
-  \setbeamercolor{item projected}{bg=Chocolate3}
-  \setbeamercolor{enumerate item}{fg=Chocolate3}
-  \setbeamercolor{enumerate subitem}{fg=Chocolate3}
-  \setbeamercolor{enumerate subsubitem}{fg=Chocolate3}
+  \setbeamercolor{itemize item}{fg=example}
+  \setbeamercolor{itemize subitem}{fg=example}
+  \setbeamercolor{itemize subsubitem}{fg=example}
+  \setbeamercolor{item projected}{bg=example}
+  \setbeamercolor{enumerate item}{fg=example}
+  \setbeamercolor{enumerate subitem}{fg=example}
+  \setbeamercolor{enumerate subsubitem}{fg=example}
+  \setbeamercolor{description item}{fg=example}
 }{}
 
 % Background
@@ -140,9 +192,9 @@
     \vfil
     \hbox to \paperwidth{
       \hspace{0.05\paperwidth}
-      \includegraphics[width=0.15\paperwidth]{./Graphics/eth_logo_kurz_pos_crop.pdf}
+      \includegraphics[width=0.15\paperwidth]{\ETHLogo}
       \hfill
-      \color{black}{\small Center for Climate Systems Modeling C2SM}
+      \small Center for Climate Systems Modeling C2SM
       \hspace{0.055\paperwidth}}
     \vfil
     \hbox to \paperwidth{
@@ -156,14 +208,14 @@
     \vspace{0.02\paperheight}
     \hbox to \paperwidth{
       \hfil
-      \includegraphics[height=0.08\paperheight]{./Graphics/C2SM_logo.pdf}
+      \includegraphics[height=0.08\paperheight]{\C2SMLogo}
       \hspace{0.055\paperwidth}}
     \vfil
     \hbox to \paperwidth{
       \hspace{0.048\paperwidth}
-      \includegraphics[width=.12\paperwidth]{./Graphics/eth_logo_kurz_pos_crop.pdf}
+      \includegraphics[width=.12\paperwidth]{\ETHLogo}
       \hspace{0.03\textwidth}
-      \color{black}{\tiny Center for Climate Systems Modeling C2SM}
+      \tiny Center for Climate Systems Modeling C2SM
       \hspace{0.35\textwidth}
       \hfil
       \tiny\mydatefootnote
@@ -176,7 +228,6 @@
 % Title page
 % ==========
 % Set title page font
-\setbeamercolor{title}{fg=bg_color, bg=structure.fg}
 \setbeamerfont{title}{size=\Large, series=\bfseries}
 \setbeamerfont{subtitle}{size=\large, series=\bfseries}
 \setbeamerfont{author}{size=\normalsize, series=\mdseries}
@@ -225,7 +276,7 @@
 % Purge navigation symbols
 \setbeamertemplate{navigation symbols}{}
 % Add page number to navigation symbols
-\setbeamercolor{footline}{fg=black}
+\setbeamercolor{footline}{fg=fg_color}
 \addtobeamertemplate{navigation symbols}{}{
   \usebeamerfont{footline}
   \usebeamercolor[fg]{footline}
