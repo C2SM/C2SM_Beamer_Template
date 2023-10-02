@@ -39,7 +39,7 @@
   \end{tikzpicture}
 }
 
-% Make blocks with cutom background and itemize colors
+% Make blocks with custom background and itemize colors
 \makeatletter
 \define@cmdkey{cblock}[cbl@]{bgcolor}[strucutre.fg]{}
 \define@cmdkey{cblock}[cbl@]{itcolor}[strucutre.fg]{}
@@ -58,6 +58,40 @@
     \setbeamercolor{enumerate subsubitem}{fg=\cbl@itcolor}}
   \begin{block}#3{#2}}
   {\end{block} \endgroup}
+\makeatother
+
+% Make colorboxes with custom background and itemize colors
+\newenvironment<>{customcolbox}[1]{
+  \begingroup
+  \setbeamercolor{boxcolor}{fg=normal text.fg,bg=#1!20!bg}
+  \setbeamercolor{itemize item}{fg=#1}
+  \setbeamercolor{itemize subitem}{fg=#1}
+  \setbeamercolor{itemize subsubitem}{fg=#1}
+  \setbeamercolor{item projected}{bg=#1}
+  \setbeamercolor{enumerate item}{fg=#1}
+  \setbeamercolor{enumerate subitem}{fg=#1}
+  \setbeamercolor{enumerate subsubitem}{fg=#1}
+  \begin{beamercolorbox}{boxcolor}}
+  {\end{beamercolorbox} \endgroup}
+
+% Make color boxes with custom background, foreground and itemize colors
+\makeatletter
+\define@cmdkey{cbox}[cbx@]{fgcolor}[normal text.fg]{}
+\define@cmdkey{cbox}[cbx@]{bgcolor}[strucutre.fg]{}
+\define@cmdkey{cbox}[cbx@]{itcolor}[strucutre.fg]{}
+\newenvironment<>{custombox}[1][]{
+  \begingroup
+  \setkeys{cbox}{#1}
+  \setbeamercolor{boxcolor}{fg=\cbx@fgcolor,bg=\cbx@bgcolor}
+  \setbeamercolor{itemize item}{fg=\cbx@itcolor}
+  \setbeamercolor{itemize subitem}{fg=\cbx@itcolor}
+  \setbeamercolor{itemize subsubitem}{fg=\cbx@itcolor}
+  \setbeamercolor{item projected}{bg=\cbx@itcolor}
+  \setbeamercolor{enumerate item}{fg=\cbx@itcolor}
+  \setbeamercolor{enumerate subitem}{fg=\cbx@itcolor}
+  \setbeamercolor{enumerate subsubitem}{fg=\cbx@itcolor}
+  \begin{beamercolorbox}{boxcolor}}
+  {\end{beamercolorbox} \endgroup}
 \makeatother
 
 \endinput
