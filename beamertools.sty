@@ -6,6 +6,7 @@
 \RequirePackage[export]{adjustbox} % graphicx is also included
 \RequirePackage{tikz}
 \usetikzlibrary{shapes.arrows}
+\RequirePackage[skins]{tcolorbox}
 
 % Draw nice "imply"-like arrows
 \newcommand{\beamerarrow}{\tikz{\node[single arrow,scale=0.3,
@@ -40,7 +41,6 @@
 }
 
 % Make blocks with custom background and itemize colors
-\makeatletter
 \define@cmdkey{cblock}[cbl@]{bgcolor}[strucutre.fg]{}
 \define@cmdkey{cblock}[cbl@]{itcolor}[strucutre.fg]{}
 \newenvironment<>{customblock}[2][]{
@@ -59,7 +59,6 @@
     \setbeamercolor{description item}{fg=\cbl@itcolor}}
   \begin{block}#3{#2}}
   {\end{block} \endgroup}
-\makeatother
 
 % Make colorboxes with custom background and itemize colors
 \newenvironment<>{customcolbox}[1]{
@@ -72,29 +71,80 @@
   \setbeamercolor{enumerate item}{fg=#1}
   \setbeamercolor{enumerate subitem}{fg=#1}
   \setbeamercolor{enumerate subsubitem}{fg=#1}
-    \setbeamercolor{description item}{fg=#1}
+  \setbeamercolor{description item}{fg=#1}
   \begin{beamercolorbox}{boxcolor}}
   {\end{beamercolorbox} \endgroup}
 
-% Make color boxes with custom background, foreground and itemize colors
-\makeatletter
-\define@cmdkey{cbox}[cbx@]{fgcolor}[normal text.fg]{}
-\define@cmdkey{cbox}[cbx@]{bgcolor}[strucutre.fg]{}
-\define@cmdkey{cbox}[cbx@]{itcolor}[strucutre.fg]{}
-\newenvironment<>{custombox}[1][]{
+% simple tcolorbox choosing one color, itmize and bg colors are derived from it
+\newenvironment<>{framebox}[2][]{
   \begingroup
-  \setkeys{cbox}{#1}
-  \setbeamercolor{boxcolor}{fg=\cbx@fgcolor,bg=\cbx@bgcolor}
-  \setbeamercolor{itemize item}{fg=\cbx@itcolor}
-  \setbeamercolor{itemize subitem}{fg=\cbx@itcolor}
-  \setbeamercolor{itemize subsubitem}{fg=\cbx@itcolor}
-  \setbeamercolor{item projected}{bg=\cbx@itcolor}
-  \setbeamercolor{enumerate item}{fg=\cbx@itcolor}
-  \setbeamercolor{enumerate subitem}{fg=\cbx@itcolor}
-  \setbeamercolor{enumerate subsubitem}{fg=\cbx@itcolor}
-  \setbeamercolor{description item}{fg=\cbx@itcolor}
-  \begin{beamercolorbox}{boxcolor}}
-  {\end{beamercolorbox} \endgroup}
-\makeatother
+  \setbeamercolor{itemize item}{fg=#2}
+  \setbeamercolor{itemize subitem}{fg=#2}
+  \setbeamercolor{itemize subsubitem}{fg=#2}
+  \setbeamercolor{item projected}{bg=#2}
+  \setbeamercolor{enumerate item}{fg=#2}
+  \setbeamercolor{enumerate subitem}{fg=#2}
+  \setbeamercolor{enumerate subsubitem}{fg=#2}
+  \begin{tcolorbox}[colback=#2!15!bg, colframe=#2, #1]}
+  {\end{tcolorbox} \endgroup}
 
-\endinput
+% Some handy new environments
+\newenvironment<>{background}[1][]{
+    \begingroup
+    \setbeamercolor{itemize item}{fg=Plum3}
+    \setbeamercolor{itemize subitem}{fg=Plum3}
+    \setbeamercolor{itemize subsubitem}{fg=Plum3}
+    \setbeamercolor{item projected}{bg=Plum3}
+    \setbeamercolor{enumerate item}{fg=Plum3}
+    \setbeamercolor{enumerate subitem}{fg=Plum3}
+    \setbeamercolor{enumerate subsubitem}{fg=Plum3}
+    \begin{tcolorbox}[colback=Plum3!15!bg, boxrule=0.5pt, arc=0pt, outer arc=0pt, left=0pt, right=1pt, top=1pt, bottom=1pt, #1]}
+    {\end{tcolorbox} \endgroup}
+
+\newenvironment<>{taskproposal}[1][]{
+    \begingroup
+    \setbeamercolor{itemize item}{fg=SkyBlue3}
+    \setbeamercolor{itemize subitem}{fg=SkyBlue3}
+    \setbeamercolor{itemize subsubitem}{fg=SkyBlue3}
+    \setbeamercolor{item projected}{bg=SkyBlue3}
+    \setbeamercolor{enumerate item}{fg=SkyBlue3}
+    \setbeamercolor{enumerate subitem}{fg=SkyBlue3}
+    \setbeamercolor{enumerate subsubitem}{fg=SkyBlue3}
+    \begin{tcolorbox}[colback=SkyBlue3!15!bg, colframe=SkyBlue3, #1]}
+    {\end{tcolorbox} \endgroup}
+
+\newenvironment<>{priority}[2][]{
+    \ifthenelse{\equal{#2}{A}}{\colorlet{bgcol}{Chameleon3}}{
+        \ifthenelse{\equal{#2}{B}}{\colorlet{bgcol}{Orange3}}{
+            \ifthenelse{\equal{#2}{C}}{\colorlet{bgcol}{ScarletRed3}}{
+                \ifthenelse{\equal{#2}{D}}{\colorlet{bgcol}{Aluminium6}}{
+                    \colorlet{bgcol}{C2SM_petrol_blue}}}}}
+    \begingroup
+    \setbeamercolor{itemize item}{fg=bgcol}
+    \setbeamercolor{itemize subitem}{fg=bgcol}
+    \setbeamercolor{itemize subsubitem}{fg=bgcol}
+    \setbeamercolor{item projected}{bg=bgcol}
+    \setbeamercolor{enumerate item}{fg=bgcol}
+    \setbeamercolor{enumerate subitem}{fg=bgcol}
+    \setbeamercolor{enumerate subsubitem}{fg=bgcol}
+    \begin{tcolorbox}[colback=bgcol!15!bg, boxrule=0pt, frame empty, arc=0pt, outer arc=0pt, #1]}
+    {\end{tcolorbox} \endgroup}
+
+\newcommand<>{\smileyframe}[2][]{
+    \begin{frame}
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[opacity=0.4,inner sep=0pt] at (current page.center){
+                \includegraphics[height=0.9\paperheight]{%
+                    \ifx\relax#1\relax Graphics/smiley_face.jpg \else #1 \fi}};
+        \end{tikzpicture}
+        \begin{center}
+            \Huge\color{C2SM_petrol_blue}\bfseries\sffamily{#2}
+        \end{center}
+    \end{frame}
+}
+
+\newcommand{\inlinecode}[1]{\tcbox[standard jigsaw,colback=normal text.fg,colframe=normal text.fg,opacityback=0.2,left=0mm,right=0mm,top=0mm,bottom=0mm,boxsep=2pt,boxrule=0.6pt,nobeforeafter,tcbox raise base]{\color{normal text.fg}\texttt{#1}}}
+
+\newenvironment{codeblock}
+{\colorlet{framecol}{normal text.fg}\begin{tcolorbox}[standard jigsaw, colback=framecol, colframe=framecol, opacityback=0.07, boxsep=0.5em, left=0, right=0, bottom=0, top=0, boxrule=0.5pt]\color{framecol}\scriptsize\begin{semiverbatim}}
+{\end{semiverbatim}\end{tcolorbox}}

@@ -1,79 +1,103 @@
 %% ============================================================ %%
-%%     Frankfurt beamer theme using the Tango color palette     %%
-%% ( http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines ) %%
+%%           Theme for the ETH Zürich C2SM group                %%
 %%                   by Matthieu Leclair                        %%
 %% ============================================================ %%
 \RequirePackage{xcolor}
 
 % General settings
 % ================
+% Create \if@doDarkMode macro
 \newif\if@doDarkMode
 \@doDarkModefalse
 \DeclareOption{darkmode}{\@doDarkModetrue}
 \ProcessOptions
 
 \mode<presentation>
-\useinnertheme[shadow=false]
 \usefonttheme{professionalfonts}
 \mode
 <all>
 
-% Define colors
-% =============
-\definecolor{C2SM_petrol_blue}{HTML}{007A96}
-\newcommand<>{\petrol}[1]{{\color#2{C2SM_petrol_blue}#1}}
-
+% Define palette
+% ==============
+% Define colors in Hsb mode
 \definecolor{darkgrayHsb}{Hsb}{195,0.15,0.21}
 \definecolor{lightgrayHsb}{Hsb}{60,0.01,0.93}
-\definecolor{blueHsb}{Hsb}{211,0.4,1}
-\definecolor{structBlueHsb}{Hsb}{211,0.5,0.9}
-\definecolor{plumHsb}{Hsb}{307,0.27,0.8}
-\definecolor{redHsb}{Hsb}{0,0.5,1}
-\definecolor{orangeHsb}{Hsb}{36,0.6,1}
-\definecolor{greenHsb}{Hsb}{90,0.4,0.9}
-\definecolor{titleBlueHsb}{Hsb}{191,1,0.4}
-
+\definecolor{petrolHsb}{Hsb}{191,1,0.59}
+\if@doDarkMode
+    \definecolor{redHsb}{Hsb}{0,0.5,1}
+    \definecolor{blueHsb}{Hsb}{211,0.4,1}
+    \definecolor{greenHsb}{Hsb}{90,0.4,0.9}
+    \definecolor{orangeHsb}{Hsb}{36,0.6,1}
+    \definecolor{yellowHsb}{Hsb}{53,0.6,1}
+    \definecolor{plumHsb}{Hsb}{307,0.27,0.8}
+    \definecolor{cyanHsb}{Hsb}{187,0.6,1}
+    \definecolor{beigeHsb}{Hsb}{37,0.5,1}
+\else
+    \definecolor{redHsb}{Hsb}{0,1,0.64}
+    \definecolor{blueHsb}{Hsb}{211,0.8,0.64}
+    \definecolor{greenHsb}{Hsb}{90,1,0.6}
+    \definecolor{orangeHsb}{Hsb}{36,1,0.8}
+    \definecolor{yellowHsb}{Hsb}{53,1,0.8}
+    \definecolor{plumHsb}{Hsb}{307,0.5,0.5}
+    \definecolor{cyanHsb}{Hsb}{191,1,0.59}
+    \definecolor{beigeHsb}{Hsb}{37,1,0.6}
+\fi
+% translate to rgb for further use
 \colorlet{darkgray}[rgb]{darkgrayHsb}
 \colorlet{lightgray}[rgb]{lightgrayHsb}
-\colorlet{blue}[rgb]{blueHsb}
-\colorlet{structBlue}[rgb]{structBlueHsb}
-\colorlet{plum}[rgb]{plumHsb}
+\colorlet{petrol}[rgb]{petrolHsb}
 \colorlet{red}[rgb]{redHsb}
-\colorlet{orange}[rgb]{orangeHsb}
+\colorlet{blue}[rgb]{blueHsb}
 \colorlet{green}[rgb]{greenHsb}
-\colorlet{titleBlue}[rgb]{titleBlueHsb}
+\colorlet{orange}[rgb]{orangeHsb}
+\colorlet{yellow}[rgb]{yellowHsb}
+\colorlet{plum}[rgb]{plumHsb}
+\colorlet{cyan}[rgb]{cyanHsb}
+\colorlet{beige}[rgb]{beigeHsb}
 
 
 % Structure colors
 % ================
 \if@doDarkMode
-  \colorlet{bg_color}{darkgray}
-  \colorlet{fg_color}{lightgray}
-  \colorlet{block}{blue}
-  \colorlet{example}{green}
-  \colorlet{alert}{orange}
-  \setbeamercolor{structure}{fg=blue}
-  \setbeamercolor{title}{fg=fg_color, bg=titleBlue}
-  \def\C2SMLogo{./Graphics/C2SM_logo_blue.pdf}
-  \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop_lightgray.pdf}
+    \definecolor{structBlueHsb}{Hsb}{211,0.5,0.9}
+    \colorlet{structBlue}[rgb]{structBlueHsb}
+
+    \colorlet{struct}{blue}
+    \colorlet{bg_color}{darkgray}
+    \colorlet{fg_color}{lightgray}
+    \colorlet{example}{green}
+    \colorlet{alert}{orange}
+    \setbeamercolor{title}{fg=fg_color, bg=petrol}
+    \def\C2SMLogo{./Graphics/C2SM_logo_blue.pdf}
+    \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop_light.pdf}
 \else
-  \definecolor{bg_color}{HTML}{FFFFFF}
-  \colorlet{fg_color}{darkgray}
-  \colorlet{block}{C2SM_petrol_blue}
-  \definecolor{example}{HTML}{8F5902}
-  \definecolor{alert}{HTML}{A40000}
-  \setbeamercolor{structure}{fg=C2SM_petrol_blue}
-  \setbeamercolor{title}{fg=bg_color, bg=C2SM_petrol_blue}
-  \def\C2SMLogo{./Graphics/C2SM_logo.pdf}
-  \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop.pdf}
+    \definecolor{redHsb}{Hsb}{0,1,0.8}
+    \definecolor{blueHsb}{Hsb}{211,0.8,0.64}
+    \definecolor{greenHsb}{Hsb}{90,1,0.6}
+    \definecolor{orangeHsb}{Hsb}{36,1,0.8}
+    \definecolor{yellowHsb}{Hsb}{53,1,0.8}
+
+    \colorlet{struct}{cyan}
+    \colorlet{bg_color}{lightgray}
+    \colorlet{fg_color}{darkgray}
+    \colorlet{example}{beige}
+    \colorlet{alert}{red}
+    \setbeamercolor{title}{fg=bg_color, bg=cyan}
+    \def\C2SMLogo{./Graphics/C2SM_logo_cyan.pdf}
+    \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop_dark.pdf}
 \fi
 
+\colorlet{block}{struct}
+\colorlet{url}{struct}
+\setbeamercolor{structure}{fg=struct, bg=bg_color}
+
+\setbeamercolor{part title}{fg=struct, bg=bg_color}
 \setbeamercolor{normal text}{fg=fg_color,bg=bg_color}
 \setbeamercolor{alerted text}{fg=alert}
 
 % Frame title
 % ===========
-\setbeamercolor{frametitle}{fg=structure.fg, bg=}
+\setbeamercolor{frametitle}{fg=struct, bg=bg_color}
 \setbeamerfont{frametitle}{size=\Large\bfseries}
 \setbeamertemplate{frametitle}{%
     \vskip6pt
@@ -184,7 +208,6 @@
 \setbeamercolor{background canvas}{bg=bg_color}
 
 % Set background picture
-\makeatletter
 \setbeamertemplate{background}{
   \ifnum\c@framenumber=1
   % Clouds picture on title page (frame number 1)
@@ -223,18 +246,17 @@
     \vspace{0.02\paperheight}}}
   \fi
 }
-\makeatother
 
 % Title page
 % ==========
 % Set title page font
 \setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{part title}{size=\Large, series=\bfseries}
 \setbeamerfont{subtitle}{size=\large, series=\bfseries}
 \setbeamerfont{author}{size=\normalsize, series=\mdseries}
 \setbeamerfont{date}{size=\normalsize, series=\mdseries}
 
 % Set title page template
-\makeatletter
 \setbeamertemplate{title page}{
   \begingroup
   \pgfsetfillopacity{0.95}
@@ -261,7 +283,6 @@
   }
   \endgroup
 }
-\makeatother
 
 \def\currentdate{\leavevmode\hbox{\the\year-\twodigits\month-\twodigits\day}}
 \def\twodigits#1{\ifnum#1<10 0\fi\the#1}
@@ -287,4 +308,11 @@
   \fi
 }
 
-\endinput
+% Part page
+% ============
+\AtBeginPart{
+  \begin{frame}
+      \centering
+      {\usebeamerfont{part title}\usebeamercolor{part title}\insertpart\par}%
+  \end{frame}
+}

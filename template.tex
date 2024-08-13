@@ -16,6 +16,14 @@
 \usepackage[sfdefault,light]{roboto}
 \usepackage{beamertools}
 
+% Set hyperlink color
+% (url color defined in beamerthemeC2SM.sty, chnages with dark/light mode)
+\hypersetup{
+  colorlinks=true,
+  linkcolor=url, % choose the color you want
+  urlcolor=url
+}
+
 % Set dates for title and footnote
 \def\mydate{December 24, 2022}
 \def\mydatefootnote{2022-12-24}
@@ -31,15 +39,14 @@
   pdfkeywords={},
   pdfsubject={},
   pdfcreator={}, 
-  pdflang={English}}
+  pdflang={English}
+}
+
 \begin{document}
 
 \maketitle
-\section{Part 1}
-\label{sec:part1}
 
-\subsection{The first frame}
-\label{sec:first_frame}
+\part{First part}
 
 \begin{frame}{The frame title}
   \note{note
@@ -48,7 +55,7 @@
   \begin{block}<1->{A normal block}
     \begin{itemize}
     \item Hello World
-    \item The 2 following blocks are in an overprint environment
+    \item The 2 following blocks are in an \inlinecode{overprint} environment
     \end{itemize}
   \end{block}
 
@@ -95,10 +102,8 @@
   \end{enumerate}
 \end{frame}
 
-\section{Part 2}
-\label{sec:part2}
-\subsection{The first frame of part 2}
-\label{sec:first_frame2}
+\part{Second part}
+
 \begin{frame}{Frame title 2}
   Some blabla
   \begin{itemize}
@@ -117,4 +122,19 @@
   \end{alertblock}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Dark mode}
+  You can compile in \alert{dark mode} using
+\begin{codeblock}
+\\usetheme\alert{[darkmode]}\{C2SM\}
+\end{codeblock}
+\end{frame}
+
 \end{document}
+
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:
