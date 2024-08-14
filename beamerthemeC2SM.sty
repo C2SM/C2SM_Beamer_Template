@@ -67,9 +67,9 @@
     \colorlet{fg_color}{lightgray}
     \colorlet{example}{green}
     \colorlet{alert}{orange}
-    \setbeamercolor{title}{fg=fg_color, bg=petrol}
     \def\C2SMLogo{./Graphics/C2SM_logo_blue.pdf}
     \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop_light.pdf}
+    \def\TitleBG{./Graphics/background_title_page_dark.png}
 \else
     \definecolor{redHsb}{Hsb}{0,1,0.8}
     \definecolor{blueHsb}{Hsb}{211,0.8,0.64}
@@ -82,14 +82,15 @@
     \colorlet{fg_color}{darkgray}
     \colorlet{example}{beige}
     \colorlet{alert}{red}
-    \setbeamercolor{title}{fg=bg_color, bg=cyan}
     \def\C2SMLogo{./Graphics/C2SM_logo_cyan.pdf}
     \def\ETHLogo{./Graphics/eth_logo_kurz_pos_crop_dark.pdf}
+    \def\TitleBG{./Graphics/background_title_page_light.png}
 \fi
 
 \colorlet{block}{struct}
 \colorlet{url}{struct}
 \setbeamercolor{structure}{fg=struct, bg=bg_color}
+\setbeamercolor{title}{fg=bg_color, bg=struct}
 
 \setbeamercolor{part title}{fg=struct, bg=bg_color}
 \setbeamercolor{normal text}{fg=fg_color,bg=bg_color}
@@ -222,7 +223,7 @@
     \vfil
     \hbox to \paperwidth{
       \hfil
-      \includegraphics[trim=10cm 0cm 0cm 0cm,clip=true,height=0.722\paperheight]{./Graphics/background_title_page.png}
+      \includegraphics[trim=10cm 0cm 0cm 0cm,clip=true,height=0.722\paperheight]{\TitleBG}
       \hfil}
     \vfil}
   \else
